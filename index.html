@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora JS</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon_io/favicon-16x16.png"
+    />
+  </head>
+  <body>
+    <div class="fundo">
+      <h1>Cesaum</h1>
+      <div class="calculadora">
+        <h1>Calculadora</h1>
+        <p id="resultado"></p>
+
+        <table>
+          <tr>
+            <td><button onclick="limpar()">C</button></td>
+            <td><button onclick="apagar()"><</button></td>
+            <td><button onclick="insert('/')">/</button></td>
+            <td><button onclick="insert('*')">x</button></td>
+          </tr>
+
+          <tr>
+            <td><button onclick="insert('7')">7</button></td>
+            <td><button onclick="insert('8')">8</button></td>
+            <td><button onclick="insert('9')">9</button></td>
+            <td><button onclick="insert('-')">-</button></td>
+          </tr>
+
+          <tr>
+            <td><button onclick="insert('4')">4</button></td>
+            <td><button onclick="insert('5')">5</button></td>
+            <td><button onclick="insert('6')">6</button></td>
+            <td><button onclick="insert('+')">+</button></td>
+          </tr>
+
+          <tr>
+            <td><button onclick="insert('1')">1</button></td>
+            <td><button onclick="insert('2')">2</button></td>
+            <td><button onclick="insert('3')">3</button></td>
+            <td rowspan="2">
+              <button class="btn-igual" onclick="calcular()">=</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <button class="btn-zero" onclick="insert('0')">0</button>
+            </td>
+            <td><button onclick="insert('.')">.</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function insert(num) {
+        var resultado = document.getElementById('resultado').innerHTML
+        if (resultado == 'ERROR') {
+          limpar()
+        }
+        var numero = document.getElementById('resultado').innerHTML
+        document.getElementById('resultado').innerHTML = numero + num
+      }
+
+      function limpar() {
+        document.getElementById('resultado').innerHTML = ''
+      }
+
+      function apagar() {
+        var resultado = document.getElementById('resultado').innerHTML
+        document.getElementById('resultado').innerHTML = resultado.substring(
+          0,
+          resultado.length - 1
+        )
+      }
+
+      function calcular() {
+        var resultado = document.getElementById('resultado').innerHTML
+
+        if (isNaN(resultado)) {
+          document.getElementById('resultado').innerHTML = 'ERROR'
+        }
+
+        if (resultado) {
+          document.getElementById('resultado').innerHTML = eval(resultado)
+          if (isNaN(eval(resultado))) {
+            document.getElementById('resultado').innerHTML = 'ERROR'
+          }
+        } else {
+          document.getElementById('resultado').innerHTML = 'Nada para calcular'
+        }
+      }
+    </script>
+  </body>
+</html>
